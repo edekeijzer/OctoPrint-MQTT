@@ -355,8 +355,8 @@ class MqttPlugin(octoprint.plugin.SettingsPlugin,
 
 		return self.mqtt_publish(topic, payload, qos=qos, allow_queueing=allow_queueing)
 
-	def mqtt_publish(self, topic, payload, qos=0, allow_queueing=False):
-		if not isinstance(payload, six.string_types):
+	def mqtt_publish(self, topic, payload, qos=0, allow_queueing=False, raw=False):
+		if not (isinstance(payload, six.string_types) or raw):
 			payload = json.dumps(payload)
 
 		if not self._mqtt_connected:
